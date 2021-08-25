@@ -1,6 +1,6 @@
 package view;
 
-import Exceptions.InvalidDateFormat;
+import exceptions.InvalidDateFormatException;
 import model.Book;
 import utils.Utility;
 
@@ -12,7 +12,7 @@ public class BookUi {
     Scanner sc = new Scanner(System.in);
     Book book = new Book();
     Utility utility = new Utility();
-    public Book createBookData() throws ParseException, InvalidDateFormat {
+    public Book createBookData() throws ParseException, InvalidDateFormatException {
         System.out.println("Enter book ID");
         book.setBookId(sc.nextInt());
         sc.nextLine();
@@ -26,7 +26,7 @@ public class BookUi {
         book.setDate(utility.dateParser(sc.nextLine()));
         return book;
     }
-    public Book updateBook() throws ParseException, InvalidDateFormat {
+    public Book updateBook() throws ParseException, InvalidDateFormatException {
         System.out.println("Enter new book ID");
         book.setBookId(sc.nextInt());
         sc.nextLine();

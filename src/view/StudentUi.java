@@ -1,7 +1,7 @@
 package view;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 import controller.BookLogics;
 import controller.StudentLogics;
 import model.Student;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentUi {
-    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         int choice;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to student module");
@@ -82,16 +82,16 @@ do {
         student.setFaculty(sc.nextLine());
         return student;
     }
-    private static void displayAllBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void displayAllBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         Utility ut = new Utility();
         BookLogics bl = new BookLogics();
         new BookUi().displayBooks(ut.resulSetToObjects(bl.displayAll()));
     }
-    private static void searchBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void searchBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         BookLogics bl = new BookLogics();
         bl.displaySingle(new BookUi().searchBook());
     }
-    public void returnBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public void returnBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         StudentLogics sl = new StudentLogics();
         StudentUi su = new StudentUi();
         BookUi bu = new BookUi();

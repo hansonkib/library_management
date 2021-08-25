@@ -1,7 +1,7 @@
 package controller;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 import interfaces.LogicI;
 import model.Book;
 import utils.DbUtil;
@@ -20,7 +20,7 @@ public class BookLogics implements LogicI<Book> {
     DbUtil db = new DbUtil();
     Utility ut = new Utility();
 
-    public BookLogics() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public BookLogics() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BookLogics implements LogicI<Book> {
     public ResultSet displaySingle(int bookId) throws SQLException {
         return this.search("SELECT * FROM books_tbl WHERE bookId='"+bookId+"'");
     }
-    public void deleteBook(int bookId) throws SQLException, ParseException, InvalidDateFormat {
+    public void deleteBook(int bookId) throws SQLException, ParseException, InvalidDateFormatException {
         if (this.checkIfExists(bookId)){
             System.out.println("You are about to delete the book with the following details");
             ArrayList<Book> bk = new Utility().resulSetToObjects(this.displaySingle(bookId));
@@ -70,7 +70,7 @@ public class BookLogics implements LogicI<Book> {
             System.out.println("book With such Id not found");
         }
     }
-    public void updateBook(int bookId) throws SQLException, ParseException, InvalidDateFormat {
+    public void updateBook(int bookId) throws SQLException, ParseException, InvalidDateFormatException {
         if (this.checkIfExists(bookId)){
             System.out.println("You are about to update the book with the following details");
             ArrayList<Book> bk = new Utility().resulSetToObjects(this.displaySingle(bookId));
@@ -95,20 +95,6 @@ public class BookLogics implements LogicI<Book> {
         else {
             return false;
         }
-//        boolean available = false;
-//        Book book = new Book();
-//        Utility ut = new Utility();
-//        ArrayList<Book> list = new ArrayList<>();
-//        list = ut.resulSetToObjects(this.displayAll());
-//        for (Book bk : list){
-//            String id = ut.IntegerToString(bk.getBookId());
-//            if ((id).equals(bookId)){
-//                System.out.println("found book record");
-//            }
-//            else {
-//                System.out.println("not found");
-//            }
-//        }
 
     }
     ArrayList<Book> books = ut.resulSetToObjects(this.displayAll());
@@ -130,7 +116,7 @@ public class BookLogics implements LogicI<Book> {
     }
     public ArrayList<Book> sortByCategory() throws SQLException, ParseException {
         ArrayList<Book> res = new ArrayList<>();
-        Collections.sort(books);
+        Collections.sort(books,bookCategoryComparator);
         for (Book b : books){
             res.add(b);
         }

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Date;
 import Enum.Gender;
 public class Student {
     private int regNo;

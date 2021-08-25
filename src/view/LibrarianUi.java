@@ -1,7 +1,7 @@
 package view;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 import controller.BookLogics;
 import controller.LibrarianLogics;
 import controller.StudentLogics;
@@ -13,7 +13,6 @@ import Enum.Gender;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 public class LibrarianUi {
     public Librarian captureLibrarianData(){
@@ -32,7 +31,7 @@ public class LibrarianUi {
         return librarian;
 
     }
-    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         Scanner sc =new Scanner(System.in);
         System.out.println("Librarian module");
         int option;
@@ -111,29 +110,29 @@ public class LibrarianUi {
     private static void addStudent() throws SQLException, UnableToLoadDriverClass {
         System.out.println((new StudentLogics().add(new StudentUi().captureStudentData()))?"Added successfully":"failed to add");
     }
-    private static void searchBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void searchBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         BookLogics bl = new BookLogics();
         bl.displaySingle(new BookUi().searchBook());
     }
-    private static void updateBooks() throws ParseException, SQLException, UnableToLoadDriverClass, InvalidDateFormat {
+    private static void updateBooks() throws ParseException, SQLException, UnableToLoadDriverClass, InvalidDateFormatException {
         BookLogics bl = new BookLogics();
         bl.updateBook(new BookUi().searchBook());
     }
-    private static void deleteBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void deleteBook() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         int bookId = new BookUi().deleteBook();
         new BookLogics().deleteBook(bookId);
     }
-    public static void addNewBook() throws ParseException, SQLException, UnableToLoadDriverClass, InvalidDateFormat {
+    public static void addNewBook() throws ParseException, SQLException, UnableToLoadDriverClass, InvalidDateFormatException {
         Book book = new BookUi().createBookData();
         BookLogics bl = new BookLogics();
         System.out.println((bl.add(book))?"New book added successfully":"failed to add book");
     }
-    private static void displayAllBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void displayAllBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         Utility ut = new Utility();
         BookLogics bl = new BookLogics();
         new BookUi().displayBooks(ut.resulSetToObjects(bl.displayAll()));
     }
-    private static void issueBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    private static void issueBooks() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         StudentUi su = new StudentUi();
         BookUi bu = new BookUi();
         System.out.println((new LibrarianLogics().issueBooks(su.searchStudent(),bu.searchBook()))?"Book issued successfully":"failed");

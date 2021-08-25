@@ -1,6 +1,6 @@
 package utils;
 
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.UnableToLoadDriverClass;
 
 import java.sql.*;
 

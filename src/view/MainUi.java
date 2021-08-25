@@ -1,14 +1,14 @@
 package view;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class MainUi {
-    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public void userMenu() throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         LibrarianUi lu = new LibrarianUi();
         StudentUi studentUi = new StudentUi();
         Scanner scanner = new Scanner(System.in);

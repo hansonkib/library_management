@@ -1,7 +1,7 @@
 package controller;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 import interfaces.LogicI;
 import model.Book;
 import model.Librarian;
@@ -75,7 +75,7 @@ public class LibrarianLogics implements LogicI<Librarian> {
         }
         return res;
     }
-    public boolean issueBooks(int regNo, int bookId) throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public boolean issueBooks(int regNo, int bookId) throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         BookLogics bl = new BookLogics();
         StudentLogics sl = new StudentLogics();
         DbUtil db = new DbUtil();

@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class UnableToLoadDriverClass extends Exception{
     public UnableToLoadDriverClass() {

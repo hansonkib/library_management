@@ -1,6 +1,6 @@
 package utils;
 
-import Exceptions.InvalidDateFormat;
+import exceptions.InvalidDateFormatException;
 import model.Book;
 import model.Student;
 
@@ -19,14 +19,14 @@ public class Utility {
     public String dateFormatter(Date date){
         return sdf.format(date);
     }
-    public Date dateParser(String date) throws InvalidDateFormat {
+    public Date dateParser(String date) throws InvalidDateFormatException {
         try {
             return sdf.parse(date);
         } catch (ParseException e) {
-            throw new InvalidDateFormat();
+            throw new InvalidDateFormatException();
         }
     }
-    public ArrayList<Book> resulSetToObjects(ResultSet rs) throws SQLException, ParseException, InvalidDateFormat {
+    public ArrayList<Book> resulSetToObjects(ResultSet rs) throws SQLException, ParseException, InvalidDateFormatException {
         Utility ut = new Utility();
         ArrayList<Book> records = new ArrayList<>();
         while (rs.next()){

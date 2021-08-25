@@ -1,7 +1,7 @@
 package controller;
 
-import Exceptions.InvalidDateFormat;
-import Exceptions.UnableToLoadDriverClass;
+import exceptions.InvalidDateFormatException;
+import exceptions.UnableToLoadDriverClass;
 import interfaces.LogicI;
 import model.Student;
 import utils.DbUtil;
@@ -101,7 +101,7 @@ public class StudentLogics implements LogicI<Student> {
             return false;
         }
     }
-    public boolean returnBook(int regNo, int bookId) throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormat {
+    public boolean returnBook(int regNo, int bookId) throws SQLException, UnableToLoadDriverClass, ParseException, InvalidDateFormatException {
         if (this.checkIfExists(regNo)){
             if (new BookLogics().checkIfExists(bookId)){
                 ResultSet rs = db.readData("SELECT * FROM borrowedBooks_tbl WHERE regNo='"+regNo+"' AND bookId='"+bookId+"'");
